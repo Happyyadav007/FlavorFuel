@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react'; // icon library (optional)
+import { Menu, X } from 'lucide-react'; 
 
 const Navbar = () => {
   const location = useLocation();
@@ -31,7 +31,7 @@ const Navbar = () => {
             ) : (
               <Link to="/" className="nav-link">Home</Link>
             )}
-            {/* <Link to="/reservation" className="nav-link">Reservation</Link> */}
+            <Link to="/reservation" className="nav-link">Reservation</Link>
           </div>
 
           {/* Hamburger */}
@@ -56,7 +56,7 @@ const Navbar = () => {
           ) : (
             <Link to="/" className="block nav-link" onClick={handleLinkClick}>Home</Link>
           )}
-          {/* <Link to="/reservation" className="block nav-link" onClick={handleLinkClick}>Reservation</Link> */}
+          <Link to="/reservation" className="block nav-link" onClick={handleLinkClick}>Reservation</Link>
         </div>
       )}
     </nav>
