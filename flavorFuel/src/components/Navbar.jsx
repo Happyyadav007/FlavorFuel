@@ -31,7 +31,7 @@ const Navbar = () => {
             ) : (
               <Link to="/" className="nav-link">Home</Link>
             )}
-            <Link to="/reservation" className="nav-link">Reservation</Link>
+            {/* <Link to="/reservation" className="nav-link">Reservation</Link> */}
           </div>
 
           {/* Hamburger */}
@@ -56,7 +56,7 @@ const Navbar = () => {
           ) : (
             <Link to="/" className="block nav-link" onClick={handleLinkClick}>Home</Link>
           )}
-          <Link to="/reservation" className="block nav-link" onClick={handleLinkClick}>Reservation</Link>
+          {/* <Link to="/reservation" className="block nav-link" onClick={handleLinkClick}>Reservation</Link> */}
         </div>
       )}
     </nav>

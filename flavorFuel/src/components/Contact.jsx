@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -6,22 +8,60 @@ const Contact = () => {
     email: '',
     message: ''
   });
+   const [errors, setErrors] = useState({});
 
-  const handleInputChange = (e) => {
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.email.trim()) newErrors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
+    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    else if (formData.message.trim().length < 10) newErrors.message = 'Message is too short';
+    return newErrors;
+  };
+
+
+const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+    });
+    setErrors({
+      ...errors,
+      [e.target.name]: '',
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Thank you for your message! We\'ll get back to you soon.');
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    toast.success("Message sent successfully!", {
+      position: "top-center",
+      autoClose: 3000,
+      theme: "light",
+      
+    });
+
     setFormData({ name: '', email: '', message: '' });
   };
 
+
   return (
     <section id="contact" className="py-20 bg-white">
+        
+       <ToastContainer 
+  position="top-center"
+  autoClose={3000}
+  theme="light"
+  toastStyle={{ zIndex: 9999 }} 
+/>
+
+          
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">

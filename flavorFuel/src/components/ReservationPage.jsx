@@ -1,59 +1,93 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ReservationPage = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    date: '',
-    time: '',
-    guests: '2',
-    message: ''
+    fullName: "",
+    email: "",
+    phone: "",
+    date: "",
+    time: "",
+    guests: "2",
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Simple validation
+    if (!formData.fullName.trim()) {
+      return toast.error("Please enter your full name");
+    }
+    if (!formData.email.trim()) {
+      return toast.error("Please enter your email");
+    }
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      return toast.error("Please enter a valid email address");
+    }
+    if (!formData.phone.trim()) {
+      return toast.error("Please enter your phone number");
+    }
+    if (!formData.date || !formData.time) {
+      return toast.error("Please select a date and time");
+    }
+
     setIsSubmitting(true);
-    
-    // Simulate API call
+
     setTimeout(() => {
-      alert(`Reservation confirmed for ${formData.fullName}! We'll contact you shortly to confirm your booking.`);
+      toast.success(`Reservation confirmed for ${formData.fullName}!`);
       setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        date: '',
-        time: '',
-        guests: '2',
-        message: ''
+        fullName: "",
+        email: "",
+        phone: "",
+        date: "",
+        time: "",
+        guests: "2",
+        message: "",
       });
       setIsSubmitting(false);
     }, 2000);
   };
 
   // Get today's date for min attribute
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
 
   return (
-    <div id="reservation" className="min-h-screen relative overflow-hidden mt-20">
+    <div
+      id="reservation"
+      className="min-h-screen relative overflow-hidden mt-20"
+    >
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnHover
+        draggable
+        toastStyle={{ zIndex: 9999 }}
+      />
+
       {/* Background Image with Overlay */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "linear-gradient(135deg, rgba(0,0,0,0.7), rgba(139,69,19,0.8), rgba(205,133,63,0.6)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop')"
+          backgroundImage:
+            "linear-gradient(135deg, rgba(0,0,0,0.7), rgba(139,69,19,0.8), rgba(205,133,63,0.6)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop')",
         }}
       />
-      
+
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
         <div className="w-full max-w-md sm:max-w-lg lg:max-w-xl">
@@ -66,7 +100,8 @@ const ReservationPage = () => {
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
-              Experience an unforgettable dining journey. Book your table now and let us create magical moments for you.
+              Experience an unforgettable dining journey. Book your table now
+              and let us create magical moments for you.
             </p>
           </div>
 
@@ -75,7 +110,10 @@ const ReservationPage = () => {
             <div className="space-y-6">
               {/* Full Name */}
               <div>
-                <label htmlFor="fullName" className="block text-sm font-semibold text-white mb-2">
+                <label
+                  htmlFor="fullName"
+                  className="block text-sm font-semibold text-white mb-2"
+                >
                   Full Name
                 </label>
                 <input
@@ -93,7 +131,10 @@ const ReservationPage = () => {
               {/* Email and Phone Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-white mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-semibold text-white mb-2"
+                  >
                     Email Address
                   </label>
                   <input
@@ -108,7 +149,10 @@ const ReservationPage = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold text-white mb-2">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-semibold text-white mb-2"
+                  >
                     Phone Number
                   </label>
                   <input
@@ -127,7 +171,10 @@ const ReservationPage = () => {
               {/* Date and Time Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="date" className="block text-sm font-semibold text-white mb-2">
+                  <label
+                    htmlFor="date"
+                    className="block text-sm font-semibold text-white mb-2"
+                  >
                     Preferred Date
                   </label>
                   <input
@@ -142,7 +189,10 @@ const ReservationPage = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="time" className="block text-sm font-semibold text-white mb-2">
+                  <label
+                    htmlFor="time"
+                    className="block text-sm font-semibold text-white mb-2"
+                  >
                     Preferred Time
                   </label>
                   <input
@@ -159,7 +209,10 @@ const ReservationPage = () => {
 
               {/* Number of Guests */}
               <div>
-                <label htmlFor="guests" className="block text-sm font-semibold text-white mb-2">
+                <label
+                  htmlFor="guests"
+                  className="block text-sm font-semibold text-white mb-2"
+                >
                   Number of Guests
                 </label>
                 <select
@@ -184,7 +237,10 @@ const ReservationPage = () => {
 
               {/* Special Requests */}
               <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-white mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-semibold text-white mb-2"
+                >
                   Special Requests or Dietary Requirements
                 </label>
                 <textarea
@@ -211,8 +267,18 @@ const ReservationPage = () => {
                   </>
                 ) : (
                   <>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
                     </svg>
                     <span>Book Your Reservation</span>
                   </>
@@ -225,22 +291,42 @@ const ReservationPage = () => {
                   Need help or have questions?
                 </p>
                 <div className="flex justify-center items-center space-x-4 text-sm">
-                  <a 
-                    href="tel:+1234567890" 
+                  <a
+                    href="tel:+1234567890"
                     className="text-amber-300 hover:text-amber-200 transition-colors duration-200 flex items-center space-x-1"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      />
                     </svg>
                     <span>Call Us</span>
                   </a>
                   <span className="text-gray-400">•</span>
-                  <a 
-                    href="mailto:reservations@restaurant.com" 
+                  <a
+                    href="mailto:reservations@restaurant.com"
                     className="text-amber-300 hover:text-amber-200 transition-colors duration-200 flex items-center space-x-1"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
                     </svg>
                     <span>Email Us</span>
                   </a>
@@ -252,8 +338,11 @@ const ReservationPage = () => {
           {/* Additional Info */}
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-300 leading-relaxed">
-              We'll confirm your reservation within 2 hours. For same-day reservations or parties of 9+, 
-              please call us directly at <span className="text-amber-300 font-semibold">(555) 123-4567</span>
+              We'll confirm your reservation within 2 hours. For same-day
+              reservations or parties of 9+, please call us directly at{" "}
+              <span className="text-amber-300 font-semibold">
+                (555) 123-4567
+              </span>
             </p>
           </div>
         </div>
@@ -261,8 +350,14 @@ const ReservationPage = () => {
 
       {/* Decorative Elements */}
       <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-10 right-10 w-16 h-16 bg-gradient-to-r from-orange-400 to-red-400 rounded-full opacity-20 animate-pulse" style={{animationDelay: '1s'}}></div>
-      <div className="absolute top-1/3 right-20 w-12 h-12 bg-gradient-to-r from-amber-300 to-yellow-400 rounded-full opacity-10 animate-pulse" style={{animationDelay: '2s'}}></div>
+      <div
+        className="absolute bottom-10 right-10 w-16 h-16 bg-gradient-to-r from-orange-400 to-red-400 rounded-full opacity-20 animate-pulse"
+        style={{ animationDelay: "1s" }}
+      ></div>
+      <div
+        className="absolute top-1/3 right-20 w-12 h-12 bg-gradient-to-r from-amber-300 to-yellow-400 rounded-full opacity-10 animate-pulse"
+        style={{ animationDelay: "2s" }}
+      ></div>
     </div>
   );
 };

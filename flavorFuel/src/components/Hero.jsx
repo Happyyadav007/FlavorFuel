@@ -20,9 +20,11 @@ const Hero = () => {
           Experience the rich flavors and aromatic spices of traditional Indian cooking, 
           crafted with passion and served with love.
         </p>
-        <button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+        <a href="#menu">
+        <button  className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
           Explore Our Menu
         </button>
+        </a>
       </div>
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

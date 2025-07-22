@@ -29,13 +29,13 @@ const menuItems = [
       name: "Dal Maharaja",
       description: "Royal black lentils slow-cooked overnight",
       price: "₹320",
-      image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop"
+      image: "https://plus.unsplash.com/premium_photo-1699293238823-7f56fe53ae3e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Naan Assortment",
       description: "Freshly baked breads with garlic, butter & herbs",
       price: "₹180",
-      image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1683533761804-5fc12be0f684?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
 ];
 
